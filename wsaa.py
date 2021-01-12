@@ -25,7 +25,7 @@ import hashlib, datetime, email, os, sys, time, traceback, warnings
 import unicodedata
 from pysimplesoap.client import SimpleXMLElement
 from utils import inicializar_y_capturar_excepciones, BaseWS, get_install_dir, \
-     exception_info, safe_console, date
+     exception_info, safe_console, date, DEFAULT_CACHE_DIR
 try:
     from M2Crypto import BIO, Rand, SMIME, SSL
 except ImportError:
@@ -300,7 +300,7 @@ class WSAA(BaseWS):
             if cache:
                 fn = os.path.join(cache, fn)
             else:
-                fn = os.path.join(self.InstallDir, "cache", fn)
+                fn = os.path.join(DEFAULT_CACHE_DIR, fn)
 
             # leer el ticket de acceso (si fue previamente solicitado)
             if not os.path.exists(fn) or os.path.getsize(fn) == 0 or \

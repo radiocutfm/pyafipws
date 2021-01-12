@@ -27,6 +27,8 @@ from pysimplesoap.client import SoapClient, SoapFault, parse_proxy, \
 from pysimplesoap.simplexml import SimpleXMLElement
 from cStringIO import StringIO
 
+from utils import DEFAULT_CACHE_DIR
+
 HOMO = True
 
 if HOMO:
@@ -249,7 +251,7 @@ class WSCOC:
             location = wsdl[:-5]
         if not cache or HOMO:
             # use 'cache' from installation base directory 
-            cache = os.path.join(self.InstallDir, 'cache')
+            cache = DEFAULT_CACHE_DIR
         self.__log("Conectando a wsdl=%s cache=%s proxy=%s" % (wsdl, cache, proxy_dict))
         self.client = SoapClient(
             wsdl = wsdl,        

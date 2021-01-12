@@ -36,8 +36,10 @@ import mimetools, mimetypes
 from HTMLParser import HTMLParser
 from Cookie import SimpleCookie
 from ConfigParser import SafeConfigParser
+import appdirs
 
 from pysimplesoap.client import SimpleXMLElement, SoapClient, SoapFault, parse_proxy, set_http_wrapper
+
 
 try:
     import json
@@ -81,6 +83,7 @@ except:
 
 DEBUG = False
 
+DEFAULT_CACHE_DIR = os.getenv("PYAFIPWS_CACHE_DIR", appdirs.user_cache_dir('PyAfipWS', 'PyAfipWS'))
 
 # Funciones para manejo de errores:
 
@@ -243,7 +246,7 @@ class BaseWS:
                 wsdl += self.WSDL[-5:]
             if not cache or self.HOMO:
                 # use 'cache' from installation base directory 
-                cache = os.path.join(self.InstallDir, 'cache')
+                cache = DEFAULT_CACHE_DIR
             # deshabilitar verificación cert. servidor si es nulo falso vacio
             if not cacert:
                 cacert = None
